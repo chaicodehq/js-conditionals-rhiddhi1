@@ -34,4 +34,81 @@
  */
 export function calculateParkingFee(hours, vehicleType) {
   // Your code here
+  // hours = Math.ceil(hours);
+
+  // const allowedVehicles = ["car", "motorcycle", "bus"];
+
+  // if (
+  //   hours <= 0 ||
+  //   typeof vehicleType !== "string" ||
+  //   !allowedVehicles.includes(vehicleType)
+  // ) {
+  //   return -1;
+  // }
+
+  // let fee = 0;
+
+  // if (vehicleType == "car") {
+  //   hours <= 1 ? (fee = 5) : (fee = 5 + (hours - 1) * 3);
+  // }
+
+  // if (vehicleType == "motorcycle") {
+  //   hours <= 1 ? (fee = 3) : (fee = 3 + (hours - 1) * 2);
+  // }
+
+  // if (vehicleType == "bus") {
+  //   hours <= 1 ? (fee = 10) : (fee = 10 + (hours - 1) * 7);
+  // }
+
+  // if (vehicleType == "car" && fee >= 30) {
+  //   fee = 30;
+  // }
+
+  // if (vehicleType == "motorcycle" && fee >= 18) {
+  //   fee = 18;
+  // }
+
+  // if (vehicleType == "bus" && fee >= 60) {
+  //   fee = 60;
+  // }
+
+  // return fee;
+
+  hours = Math.ceil(hours);
+
+  if (hours <= 0 || typeof vehicleType !== "string") {
+    return -1;
+  }
+
+  let dailyMaximum = 0;
+  let feeForAnHour = 0;
+  let feeAboveAnHour = 0;
+
+  switch (vehicleType) {
+    case "car":
+      feeForAnHour = 5;
+      feeAboveAnHour = 3;
+      dailyMaximum = 30;
+      break;
+
+    case "motorcycle":
+      feeForAnHour = 3;
+      feeAboveAnHour = 2;
+      dailyMaximum = 18;
+      break;
+
+    case "bus":
+      feeForAnHour = 10;
+      feeAboveAnHour = 7;
+      dailyMaximum = 60;
+      break;
+
+    default:
+      return -1;
+  }
+
+  let totalFee =
+    hours === 1 ? feeForAnHour : feeForAnHour + (hours - 1) * feeAboveAnHour;
+
+  return Math.min(totalFee, dailyMaximum);
 }
